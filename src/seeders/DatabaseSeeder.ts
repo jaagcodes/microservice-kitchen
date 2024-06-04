@@ -11,9 +11,9 @@ export class DatabaseSeeder extends Seeder {
         name: 'Tomato Salad',
         description: 'A fresh tomato salad with lemon and lettuce.',
         ingredients: [
-          { ingredientId: '3fb6666c-e52d-4e78-a9ac-b2123b41e770', quantity: 2 }, // tomato
-          { ingredientId: '6daabbd5-6a5c-46c7-8dbb-4d43436d98fc', quantity: 1 }, // lemon
-          { ingredientId: '9bce6215-6a3f-4968-b23a-f7bad092e814', quantity: 1 }, // lettuce
+          { ingredientId: 'c7aa782f-86dd-4b1d-8381-5c2b53135d27', quantity: 2 }, // tomato
+          { ingredientId: '1dcb0ba4-4485-44d0-a048-5c2a64be4d88', quantity: 1 }, // lemon
+          { ingredientId: 'da0d5af9-891d-4d30-9879-85ab569c723d', quantity: 1 }, // lettuce
         ],
       },
       {
@@ -21,43 +21,43 @@ export class DatabaseSeeder extends Seeder {
         description: 'Delicious rice mixed with potatoes and onions.',
         ingredients: [
           { ingredientId: 'b525c3b3-5f36-4d20-81a8-6cd93cf74566', quantity: 3 }, // potato
-          { ingredientId: '0f31de29-1d87-468a-893f-e1f6eec52551', quantity: 2 }, // rice
-          { ingredientId: '05b68ede-7a7f-42cc-8177-277f7711d38d', quantity: 1 }, // onion
+          { ingredientId: 'd3d3ad87-f23e-47b5-b05e-45bb4a7775a1', quantity: 2 }, // rice
+          { ingredientId: 'f6217e05-da07-4e71-aca2-6984748239e6', quantity: 1 }, // onion
         ],
       },
       {
         name: 'Cheesy Meatloaf',
         description: 'A savory meatloaf with melted cheese.',
         ingredients: [
-          { ingredientId: '65b08f0e-84db-493b-b21f-4fba2466dbf2', quantity: 2 }, // meat
-          { ingredientId: '081258a4-147d-4043-932d-cbd825880174', quantity: 1 }, // cheese
-          { ingredientId: '05b68ede-7a7f-42cc-8177-277f7711d38d', quantity: 1 }, // onion
+          { ingredientId: 'e19e08a8-9efd-4134-84cf-08443c55637b', quantity: 2 }, // meat
+          { ingredientId: 'ae6ce2e1-a866-4459-a9f9-8aa079034d4e', quantity: 1 }, // cheese
+          { ingredientId: 'f6217e05-da07-4e71-aca2-6984748239e6', quantity: 1 }, // onion
         ],
       },
       {
         name: 'Chicken Stir Fry',
         description: 'A quick and tasty chicken stir fry.',
         ingredients: [
-          { ingredientId: '2ed8bf8e-0bb9-44b9-8688-5ef309eeb1af', quantity: 2 }, // chicken
-          { ingredientId: '3fb6666c-e52d-4e78-a9ac-b2123b41e770', quantity: 1 }, // tomato
-          { ingredientId: '6daabbd5-6a5c-46c7-8dbb-4d43436d98fc', quantity: 1 }, // lemon
+          { ingredientId: '5b00b056-ef72-4bba-896c-4b62239df525', quantity: 2 }, // chicken
+          { ingredientId: 'c7aa782f-86dd-4b1d-8381-5c2b53135d27', quantity: 1 }, // tomato
+          { ingredientId: '1dcb0ba4-4485-44d0-a048-5c2a64be4d88', quantity: 1 }, // lemon
         ],
       },
       {
         name: 'Lemon Rice',
         description: 'A refreshing lemon-flavored rice dish.',
         ingredients: [
-          { ingredientId: '0f31de29-1d87-468a-893f-e1f6eec52551', quantity: 3 }, // rice
-          { ingredientId: '6daabbd5-6a5c-46c7-8dbb-4d43436d98fc', quantity: 2 }, // lemon
-          { ingredientId: '05b68ede-7a7f-42cc-8177-277f7711d38d', quantity: 1 }, // onion
+          { ingredientId: 'd3d3ad87-f23e-47b5-b05e-45bb4a7775a1', quantity: 3 }, // rice
+          { ingredientId: '1dcb0ba4-4485-44d0-a048-5c2a64be4d88', quantity: 2 }, // lemon
+          { ingredientId: 'f6217e05-da07-4e71-aca2-6984748239e6', quantity: 1 }, // onion
         ],
       },
       {
         name: 'Ketchup Chicken',
         description: 'A tangy chicken dish with ketchup.',
         ingredients: [
-          { ingredientId: '2ed8bf8e-0bb9-44b9-8688-5ef309eeb1af', quantity: 2 }, // chicken
-          { ingredientId: 'a4c7aa4a-6daa-4763-8d1e-85f725537d32', quantity: 2 }, // ketchup
+          { ingredientId: '5b00b056-ef72-4bba-896c-4b62239df525', quantity: 2 }, // chicken
+          { ingredientId: '71bf82a6-5701-4931-b3ba-bfb8a0146fcc', quantity: 2 }, // ketchup
           { ingredientId: 'b525c3b3-5f36-4d20-81a8-6cd93cf74566', quantity: 1 }, // potato
         ],
       },

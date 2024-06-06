@@ -53,9 +53,11 @@ export class AppService {
     const allAvailable = data.ingredients.every(ingredient => ingredient.isAvailable);
 
     if (allAvailable) {
+      const recipe = await this.recipeRepository.findOne({ id: data.orderId });
       this.orderClient.emit('order_completed', {
         orderId: data.orderId,
         recipeId: data.recipeId,
+        recipeName: recipe.name,
       });
     } else {
       console.log(`Not all ingredients for order ${data.orderId} are available.`);

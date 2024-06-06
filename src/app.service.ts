@@ -10,6 +10,7 @@ import { Recipe } from './entities/recipes.entity';
 
 @Injectable()
 export class AppService {
+
   getHello(): string {
     return 'Hello World!';
   }
@@ -18,8 +19,9 @@ export class AppService {
     @InjectRepository(Recipe)
     private readonly recipeRepository: EntityRepository<Recipe>,
     @Inject('KITCHEN') private client: ClientProxy,
+    @Inject('ORDER') private readonly orderClient: ClientProxy,
     private readonly em: EntityManager,
-  ) {}
+  ) { }
 
   @CreateRequestContext()
   async handleOrderCreated(data: { orderId: string }) {
@@ -30,13 +32,34 @@ export class AppService {
 
     console.log(selectedRecipe);
 
-    for (const ingredient of selectedRecipe.recipeIngredients) {
-      this.client.emit('ingredient_request', {
+    const ingredientsRequest = selectedRecipe.recipeIngredients.map(ingredient => ({
+      ingredientId: ingredient.ingredientId,
+      quantity: ingredient.quantity,
+    }));
+
+    this.client.emit('ingredients_request', {
+      orderId: data.orderId,
+      recipeId: selectedRecipe.id,
+      ingredients: ingredientsRequest,
+    });
+  }
+
+  @CreateRequestContext()
+  async handleIngredientAvailability(data: {
+    orderId: string;
+    recipeId: string;
+    ingredients: { ingredientId: string; isAvailable: boolean }[];
+  }) {
+    const allAvailable = data.ingredients.every(ingredient => ingredient.isAvailable);
+
+    if (allAvailable) {
+      this.orderClient.emit('order_completed', {
         orderId: data.orderId,
-        recipeId: selectedRecipe.id,
-        ingredientId: ingredient.ingredientId,
-        quantity: ingredient.quantity,
+        recipeId: data.recipeId,
       });
+    } else {
+      console.log(`Not all ingredients for order ${data.orderId} are available.`);
     }
   }
+
 }

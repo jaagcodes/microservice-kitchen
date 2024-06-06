@@ -15,4 +15,13 @@ export class AppController {
   async handleOrderCreated(data: { orderId: string }) {
     await this.appService.handleOrderCreated(data);
   }
+
+  @EventPattern('ingredient_availability')
+  async handleIngredientAvailability(data: {
+    orderId: string;
+    recipeId: string;
+    ingredients: { ingredientId: string; isAvailable: boolean }[];
+  }) {
+    await this.appService.handleIngredientAvailability(data);
+  }
 }

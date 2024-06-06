@@ -25,6 +25,18 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           },
         }),
       },
+      {
+        name: 'ORDER',
+        imports: [ConfigModule],
+        inject: [ConfigService],
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.REDIS,
+          options: {
+            host: configService.get('REDIS_HOST'),
+            port: configService.get('REDIS_PORT'),
+          },
+        }),
+      }
     ]),
   ],
   controllers: [AppController],

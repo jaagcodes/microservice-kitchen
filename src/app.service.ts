@@ -4,12 +4,14 @@ import {
   EntityManager,
   EntityRepository,
 } from '@mikro-orm/postgresql';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { Recipe } from './entities/recipes.entity';
 
 @Injectable()
 export class AppService {
+
+  private readonly logger = new Logger(AppService.name);
 
   getHello(): string {
     return 'Hello World!';
@@ -53,7 +55,7 @@ export class AppService {
     const allAvailable = data.ingredients.every(ingredient => ingredient.isAvailable);
 
     if (allAvailable) {
-      const recipe = await this.recipeRepository.findOne({ id: data.orderId });
+      const recipe = await this.recipeRepository.findOne({ id: data.recipeId });
       this.orderClient.emit('order_completed', {
         orderId: data.orderId,
         recipeId: data.recipeId,

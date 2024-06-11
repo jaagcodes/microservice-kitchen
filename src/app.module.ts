@@ -6,6 +6,7 @@ import mikroOrmConfig from './mikro-orm.config';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Recipe } from './entities/recipes.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { HealthCheckService } from './services/health-check.service';
 
 @Module({
   imports: [
@@ -40,6 +41,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
   ],
   controllers: [AppController],
-  providers: [RecipeService],
+  providers: [RecipeService, HealthCheckService],
 })
 export class AppModule {}

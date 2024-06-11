@@ -1,6 +1,7 @@
-import { Controller, InternalServerErrorException, Logger } from '@nestjs/common';
+import { Controller, Get, InternalServerErrorException, Logger } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
 import { RecipeService } from './services/recipe.service';
+import { HealthCheckService } from './services/health-check.service';
 
 @Controller()
 export class AppController {
@@ -9,7 +10,19 @@ export class AppController {
 
   constructor(
     private readonly recipeService: RecipeService,
+    private readonly healthCheckService: HealthCheckService,
   ) { }
+
+  @Get('health')
+    getHealthStatus(): string {
+      try {
+        this.logger.log('Checking health status');
+        return this.healthCheckService.getHealthStatus();
+      } catch (error) {
+        this.logger.error('Error checking health status', error.stack);
+        throw new InternalServerErrorException('Error checking health status');
+      }
+    }
 
   @EventPattern('order_created')
   async handleOrderCreated(data: { orderId: string }) {

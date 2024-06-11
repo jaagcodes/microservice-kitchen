@@ -1,19 +1,26 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, InternalServerErrorException, Logger } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
+import { RecipeService } from './services/recipe.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+  private readonly logger = new Logger(AppController.name);
+
+  constructor(
+    private readonly recipeService: RecipeService,
+  ) { }
 
   @EventPattern('order_created')
   async handleOrderCreated(data: { orderId: string }) {
-    await this.appService.handleOrderCreated(data);
+    try {
+      this.logger.log(`Handling order created event for order ID ${data.orderId}`);
+      await this.recipeService.handleOrderCreated(data);
+      this.logger.log(`Order created event handled for order ID ${data.orderId}`);
+    } catch (error) {
+      this.logger.error(`Error handling order created event for order ID ${data.orderId}: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Error handling order created event');
+    }
   }
 
   @EventPattern('ingredient_availability')
@@ -22,6 +29,13 @@ export class AppController {
     recipeId: string;
     ingredients: { ingredientId: string; isAvailable: boolean }[];
   }) {
-    await this.appService.handleIngredientAvailability(data);
+    try {
+      this.logger.log(`Handling ingredient availability event for order ID ${data.orderId}`);
+      await this.recipeService.handleIngredientAvailability(data);
+      this.logger.log(`Ingredient availability event handled for order ID ${data.orderId}`);
+    } catch (error) {
+      this.logger.error(`Error handling ingredient availability event for order ID ${data.orderId}: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Error handling ingredient availability event');
+    }
   }
 }

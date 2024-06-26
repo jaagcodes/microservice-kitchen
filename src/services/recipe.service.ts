@@ -35,7 +35,7 @@ export class RecipeService {
 
             this.logger.log(recipes);
             const selectedRecipe = recipes[Math.floor(Math.random() * recipes.length)];
-            this.logger.log(`Selected recipe: ${selectedRecipe}`);
+            
 
             const ingredientsRequest = selectedRecipe.recipeIngredients.map(ingredient => ({
                 ingredientId: ingredient.ingredientId,

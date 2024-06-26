@@ -33,7 +33,6 @@ export class RecipeService {
                 throw new NotFoundException('No recipes found');
             }
 
-            this.logger.log(recipes);
             const selectedRecipe = recipes[Math.floor(Math.random() * recipes.length)];
             
 

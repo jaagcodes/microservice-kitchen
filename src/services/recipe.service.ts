@@ -33,6 +33,7 @@ export class RecipeService {
                 throw new NotFoundException('No recipes found');
             }
 
+            this.logger.log(recipes);
             const selectedRecipe = recipes[Math.floor(Math.random() * recipes.length)];
             this.logger.log(`Selected recipe: ${selectedRecipe}`);
 
@@ -41,6 +42,7 @@ export class RecipeService {
                 quantity: ingredient.quantity,
             }));
 
+            this.logger.log(`Requested ingredients: ${ingredientsRequest}`);
             this.client.emit('ingredients_request', {
                 orderId: data.orderId,
                 recipeId: selectedRecipe.id,
